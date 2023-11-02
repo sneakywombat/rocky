@@ -1,0 +1,16 @@
+rust_binary(
+    name="rocky",
+    srcs = glob(["src/**/*.rs"]),
+    env = {
+        "OUT_DIR": "",
+    },
+    deps = [
+        "//third-party:librocksdb-sys",
+    ],
+    edition = "2021",
+    visibility=["PUBLIC"],
+    # crashes, cxx11 error it seems?
+    # rustc_flags = [
+    #     "-Clink-arg=buck-out/v2/gen/root/9f4d83578bb24895/third-party/__librocksdb-sys-0.11.0+8.1.1-build-script-run__/OUT_DIR/librocksdb.a"
+    # ]
+)
