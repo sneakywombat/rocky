@@ -9,3 +9,9 @@ rustup install nightly-2023-07-10
 cargo +nightly-2023-07-10 install --git https://github.com/facebook/buck2.git buck2
 cargo install --locked --git https://github.com/facebookincubator/reindeer reindeer
 ```
+
+Then try to build:
+
+```
+buck2 build //rocky:rocky
+```
