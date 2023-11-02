@@ -11,6 +11,20 @@ rustup install nightly-2023-07-10
 cargo +nightly-2023-07-10 install --git https://github.com/facebook/buck2.git buck2
 cargo install --locked --git https://github.com/facebookincubator/reindeer reindeer
 ```
+## versions
+clang
+```
+ubuntu@librocksdb:~/rust/third-party$ clang --version
+Ubuntu clang version 14.0.0-1ubuntu1.1
+Target: aarch64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+```
+ld.lld
+```
+ubuntu@librocksdb:~/rust/third-party$ ld.lld --version
+Ubuntu LLD 14.0.0 (compatible with GNU linkers)
+```
 
 Then try to build:
 
