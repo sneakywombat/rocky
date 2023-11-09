@@ -1,7 +1,7 @@
 buildscript = []
-[[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript]]
-[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript.cxx_library]
-name = "libz-sys-x64_64-linux"
+[[platform_fixup.'cfg(target_os = "linux")'.buildscript]]
+[platform_fixup.'cfg(target_os = "linux")'.buildscript.cxx_library]
+name = "libz-sys-linux"
 srcs = [
     "src/zlib/adler32.c",
     "src/zlib/compress.c",

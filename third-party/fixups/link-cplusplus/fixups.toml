@@ -1,5 +1,0 @@
-cargo_env = true
-[env]
-OUT_DIR = "."
-[[buildscript]]
-[buildscript.rustc_flags]

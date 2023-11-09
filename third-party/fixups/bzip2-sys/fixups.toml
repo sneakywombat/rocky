@@ -1,8 +1,8 @@
 
 buildscript = []
-[[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript]]
-[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript.cxx_library]
-name = "bzip2-sys-x64_64-linux"
+[[platform_fixup.'cfg(target_os = "linux")'.buildscript]]
+[platform_fixup.'cfg(target_os = "linux")'.buildscript.cxx_library]
+name = "bzip2-sys-linux"
 srcs=[
     "bzip2-1.0.8/blocksort.c",
     "bzip2-1.0.8/huffman.c",
@@ -12,7 +12,6 @@ srcs=[
     "bzip2-1.0.8/decompress.c",
     "bzip2-1.0.8/bzlib.c",
 ]
-# headers = ["bzip2-1.0.8/**/bzlib.h.h"]
 include_paths = [
     "bzip2-1.0.8/",
 ]

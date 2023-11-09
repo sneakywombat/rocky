@@ -215,10 +215,10 @@ cargo.rust_library(
     ],
     platform = {
         "linux-arm64": dict(
-            deps = [":bzip2-sys-0.1.11+1.0.8-bzip2-sys-x64_64-linux"],
+            deps = [":bzip2-sys-0.1.11+1.0.8-bzip2-sys-linux"],
         ),
         "linux-x86_64": dict(
-            deps = [":bzip2-sys-0.1.11+1.0.8-bzip2-sys-x64_64-linux"],
+            deps = [":bzip2-sys-0.1.11+1.0.8-bzip2-sys-linux"],
         ),
     },
     visibility = [],
@@ -226,7 +226,7 @@ cargo.rust_library(
 )
 
 cxx_library(
-    name = "bzip2-sys-0.1.11+1.0.8-bzip2-sys-x64_64-linux",
+    name = "bzip2-sys-0.1.11+1.0.8-bzip2-sys-linux",
     srcs = [
         "vendor/bzip2-sys-0.1.11+1.0.8/bzip2-1.0.8/blocksort.c",
         "vendor/bzip2-sys-0.1.11+1.0.8/bzip2-1.0.8/bzlib.c",
@@ -1471,17 +1471,17 @@ cargo.rust_library(
     ],
     platform = {
         "linux-arm64": dict(
-            deps = [":libz-sys-1.1.12-libz-sys-x64_64-linux"],
+            deps = [":libz-sys-1.1.12-libz-sys-linux"],
         ),
         "linux-x86_64": dict(
-            deps = [":libz-sys-1.1.12-libz-sys-x64_64-linux"],
+            deps = [":libz-sys-1.1.12-libz-sys-linux"],
         ),
     },
     visibility = [],
 )
 
 cxx_library(
-    name = "libz-sys-1.1.12-libz-sys-x64_64-linux",
+    name = "libz-sys-1.1.12-libz-sys-linux",
     srcs = [
         "vendor/libz-sys-1.1.12/src/zlib/adler32.c",
         "vendor/libz-sys-1.1.12/src/zlib/compress.c",
@@ -1564,10 +1564,10 @@ cargo.rust_library(
     edition = "2015",
     platform = {
         "linux-arm64": dict(
-            deps = [":lz4-sys-1.9.4-lz4-sys-x64_64-aarch64-linux"],
+            deps = [":lz4-sys-1.9.4-lz4-sys-linux"],
         ),
         "linux-x86_64": dict(
-            deps = [":lz4-sys-1.9.4-lz4-sys-x64_64-aarch64-linux"],
+            deps = [":lz4-sys-1.9.4-lz4-sys-linux"],
         ),
     },
     visibility = [],
@@ -1575,7 +1575,7 @@ cargo.rust_library(
 )
 
 cxx_library(
-    name = "lz4-sys-1.9.4-lz4-sys-x64_64-aarch64-linux",
+    name = "lz4-sys-1.9.4-lz4-sys-linux",
     srcs = [
         "vendor/lz4-sys-1.9.4/liblz4/lib/lz4.c",
         "vendor/lz4-sys-1.9.4/liblz4/lib/lz4file.c",
