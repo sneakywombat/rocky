@@ -1057,6 +1057,7 @@ cargo.rust_library(
         "CARGO_PKG_VERSION_MAJOR": "0",
         "CARGO_PKG_VERSION_MINOR": "11",
         "CARGO_PKG_VERSION_PATCH": "0",
+        "OPT_LEVEL": "0",
         "OUT_DIR": ".",
     },
     features = ["snappy"],

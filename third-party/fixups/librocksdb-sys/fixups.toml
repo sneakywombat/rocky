@@ -11,6 +11,7 @@ rustc_flags = [
 cargo_env = true
 [env]
 OUT_DIR = "."
+OPT_LEVEL = "0"
 
 [platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))']
 overlay = "aarch64/linux"
