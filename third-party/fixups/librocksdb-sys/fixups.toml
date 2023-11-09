@@ -1,20 +1,20 @@
 
 buildscript = []
-# in the event we need a specific fixup, leaving for now
-# [platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))']
+
+# intent is to apply to all arch targets
 omit_features = ["bzip2","default","static","lz4"]
 features = ["snappy"]
 rustc_flags = [
     "-lstdc++",
     "-latomic",
 ]
-# extra_mapped_srcs = {"sqlite3/bindgen_bundled_version.rs" = "src/bindgen.rs"}
-#     env = {
-#         "DEP_LZ4_INCLUDE": "/home/ubuntu/rust/third-party/vendor/lz4-sys-1.9.4/liblz4/lib",
-#     },
 cargo_env = true
 [env]
 OUT_DIR = "."
+
+[platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))']
+overlay = "aarch64/linux"
+
 [[platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))'.buildscript]]
 [platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))'.buildscript.cxx_library]
 name = "rocksdb-aarch64-linux"
@@ -363,6 +363,16 @@ include_paths = [
     "rocksdb/include/utilities",
     "rocksdb/snappy", # for better or worse, we use the provided snappy
 ]
+# not a cpp dep but rather a bindings.rs that would normally get generated
+# from the buildscript. it was easier to generate it via cargo and then copy
+# it into a arch specific fixup
+# fixup_include_paths = [
+#   "include/aarch64/linux", # we copy
+# ]
+
+# env = {
+#     "DEP_LZ4_INCLUDE": "/home/ubuntu/rust/third-party/vendor/lz4-sys-1.9.4/liblz4/lib",
+# },
 preprocessor_flags = [
     "-DOS_LINUX",
     "-DROCKSDB_PLATFORM_POSIX",

@@ -1044,11 +1044,6 @@ alias(
 
 cargo.rust_library(
     name = "librocksdb-sys-0.11.0+8.1.1",
-    srcs = [
-        "vendor/librocksdb-sys-0.11.0+8.1.1/src/bindings.rs",
-        "vendor/librocksdb-sys-0.11.0+8.1.1/src/lib.rs",
-        "vendor/librocksdb-sys-0.11.0+8.1.1/src/test.rs",
-    ],
     crate = "librocksdb_sys",
     crate_root = "vendor/librocksdb-sys-0.11.0+8.1.1/src/lib.rs",
     edition = "2018",
@@ -1067,6 +1062,13 @@ cargo.rust_library(
     features = ["snappy"],
     platform = {
         "linux-arm64": dict(
+            srcs = [
+                "vendor/librocksdb-sys-0.11.0+8.1.1/src/lib.rs",
+                "vendor/librocksdb-sys-0.11.0+8.1.1/src/test.rs",
+            ],
+            mapped_srcs = {
+                "fixups/librocksdb-sys/aarch64/linux/src/bindings.rs": "vendor/librocksdb-sys-0.11.0+8.1.1/src/bindings.rs",
+            },
             deps = [":librocksdb-sys-0.11.0+8.1.1-rocksdb-aarch64-linux"],
         ),
     },
