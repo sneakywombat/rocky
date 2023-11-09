@@ -7,6 +7,10 @@ rust_binary(
     deps = [
         "//third-party:rocksdb",
     ],
+    # if you want it static. not sure this is the best way lol
+    # rustc_flags = [
+    #     "-C", "target-feature=+crt-static",
+    # ],
 )
 
 # sub deps for testing
