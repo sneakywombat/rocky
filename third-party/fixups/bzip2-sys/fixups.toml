@@ -12,7 +12,7 @@ srcs=[
     "bzip2-1.0.8/decompress.c",
     "bzip2-1.0.8/bzlib.c",
 ]
-headers = ["bzip2-1.0.8/**/bzlib.h.h"]
+# headers = ["bzip2-1.0.8/**/bzlib.h.h"]
 include_paths = [
     "bzip2-1.0.8/",
 ]

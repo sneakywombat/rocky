@@ -15,7 +15,17 @@ path = "top/main.rs"
 # List of packages to be imported, with version constraints, features
 # and all options Cargo supports.
 [dependencies]
+rocksdb = { version = "0.21.0", features = [
+  "snappy",
+#   "lz4",
+#   "zstd",
+#   "zlib",
+#   "multi-threaded-cf",
+], default-features = false }
 librocksdb-sys = "0.11.0+8.1.1"
-
+# a few deps i was experimenting with
+lz4 = "1.24.0"
+lz4-sys = "1.9.4"
+libc = "0.2"
 # Local patches - typically git references
 [patch.crates-io]

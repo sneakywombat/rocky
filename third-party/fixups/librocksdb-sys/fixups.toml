@@ -1,27 +1,25 @@
-# [env]
-# OPT_LEVEL = "0"
-# [[buildscript]]
-# [buildscript.rustc_flags]
-# [[buildscript]]
-# [buildscript.gen_srcs]
 
-# omit_features = [
-#     "default",
-#     "libz-sys",
-#     "lz4",
-#     "lz4-sys",
-#     "snappy",
-#     "static",
-#     "zlib",
-#     "zstd",
-#     "zstd-sys",
-# ]
-# features = ["static","lz4"]
 buildscript = []
-[[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript]]
-[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript.cxx_library]
-name = "librocksdb-sys-x64_64-linux"
+# in the event we need a specific fixup, leaving for now
+# [platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))']
+omit_features = ["bzip2","default","static","lz4"]
+features = ["snappy"]
+rustc_flags = [
+    "-lstdc++",
+    "-latomic",
+]
+# extra_mapped_srcs = {"sqlite3/bindgen_bundled_version.rs" = "src/bindgen.rs"}
+#     env = {
+#         "DEP_LZ4_INCLUDE": "/home/ubuntu/rust/third-party/vendor/lz4-sys-1.9.4/liblz4/lib",
+#     },
+cargo_env = true
+[env]
+OUT_DIR = "."
+[[platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))'.buildscript]]
+[platform_fixup.'cfg(all(target_arch = "aarch64", target_os = "linux"))'.buildscript.cxx_library]
+name = "rocksdb-aarch64-linux"
 srcs=[
+    "build_version.cc",  # yes! it's prebuilt from crate
     "rocksdb/cache/cache.cc",
     "rocksdb/cache/cache_entry_roles.cc",
     "rocksdb/cache/cache_helpers.cc",
@@ -253,7 +251,7 @@ srcs=[
     "rocksdb/trace_replay/trace_record_result.cc",
     "rocksdb/trace_replay/trace_replay.cc",
     "rocksdb/util/async_file_reader.cc",
-    "rocksdb/util/build_version.cc",
+    # "rocksdb/util/build_version.cc", # no!!
     "rocksdb/util/cleanable.cc",
     "rocksdb/util/coding.cc",
     "rocksdb/util/compaction_job_stats_impl.cc",
@@ -359,30 +357,28 @@ srcs=[
     "rocksdb/utilities/write_batch_with_index/write_batch_with_index.cc",
     "rocksdb/utilities/write_batch_with_index/write_batch_with_index_internal.cc",
 ]
-headers = ["rocksdb/**/*.h"]#, "snappy**/*.h"]
-exclude = ["build_version.cc"]
 include_paths = [
-    "rocksdb/",
+    "rocksdb",
     "rocksdb/include",
-    # "snappy/",
+    "rocksdb/include/utilities",
+    "rocksdb/snappy", # for better or worse, we use the provided snappy
 ]
-deps = [
-    # ":zstd-sys-2.0.8+zstd.1.5.5",
-    # ":libc-0.2.148",
-    # ":lz4-sys-1.9.4",
-    # ":cc-1.0.83",
-    # ":glob-0.3.1",
-    # ":bindgen-0.65.1",
-]
-compiler_flags = [
-    "-O0", 
+preprocessor_flags = [
     "-DOS_LINUX",
     "-DROCKSDB_PLATFORM_POSIX",
     "-DROCKSDB_LIB_IO_POSIX",
     "-DROCKSDB_SUPPORT_THREAD_LOCAL",
-    # "-DSNAPPY=1",
-    "-DLZ4=1", 
+]
+compiler_flags = [
+    "-O0",
+    "-Wsign-compare",
+    "-Wshadow",
+    "-Wno-unused-parameter",
+    "-Wno-unused-variable",
+    "-Woverloaded-virtual",
+    "-Wnon-virtual-dtor",
+    "-Wno-missing-field-initializers",
+    "-Wno-strict-aliasing",
+    "-Wno-invalid-offsetof",
     "-std=c++17",
 ]
-[env]
-OUT_DIR = "."

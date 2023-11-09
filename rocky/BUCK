@@ -1,16 +1,44 @@
 rust_binary(
     name="rocky",
-    srcs = glob(["src/**/*.rs"]),
-    env = {
-        "OUT_DIR": "",
-    },
+    srcs = ["src/rocky.rs"],
+    crate_root = "src/rocky.rs",
+    edition = "2021",
+    visibility=["PUBLIC"],
+    deps = [
+        "//third-party:rocksdb",
+    ],
+)
+
+# sub deps for testing
+rust_binary(
+    name="libby",
+    srcs = ["src/libby.rs"],
+    crate_root = "src/libby.rs",
+    edition = "2021",
+    visibility=["PUBLIC"],
     deps = [
         "//third-party:librocksdb-sys",
     ],
+)
+
+rust_binary(
+    name="lz4",
+    srcs = ["src/lz4.rs"],
+    crate_root = "src/lz4.rs",
     edition = "2021",
     visibility=["PUBLIC"],
-    # crashes, cxx11 error it seems?
-    # rustc_flags = [
-    #     "-Clink-arg=buck-out/v2/gen/root/9f4d83578bb24895/third-party/__librocksdb-sys-0.11.0+8.1.1-build-script-run__/OUT_DIR/librocksdb.a"
-    # ]
+    deps = [
+        "//third-party:lz4"
+    ]
+)
+
+rust_binary(
+    name="libc",
+    srcs = ["src/libc.rs"],
+    crate_root = "src/libc.rs",
+    edition = "2021",
+    visibility=["PUBLIC"],
+    deps = [
+        "//third-party:libc"
+    ]
 )

@@ -1,0 +1,36 @@
+# cargo_env = true
+# [[buildscript]]
+# [buildscript.rustc_flags]
+# [[buildscript]]
+# [buildscript.gen_srcs]
+buildscript = []
+[[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript]]
+[platform_fixup.'cfg(all(any(target_arch = "x86_64", target_arch = "aarch64"), target_os = "linux"))'.buildscript.cxx_library]
+name = "lz4-sys-x64_64-aarch64-linux"
+srcs = [
+    "liblz4/lib/*.c",
+]
+include_paths = [
+    "lib",
+]
+compiler_flags = [
+    "-O0",
+    # "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wundef",
+    "-Wshadow",
+    "-Wcast-align",
+    "-Werror",
+    "-pedantic"
+]
+
+
+    # features = [
+    #     # "default",
+    #     "lz4",
+    #     # "static",
+    # ],
+    # env = {
+    #     "DEP_LZ4_INCLUDE": "/home/ubuntu/rust/third-party/vendor/lz4-sys-1.9.4/liblz4/lib",
+    # },
